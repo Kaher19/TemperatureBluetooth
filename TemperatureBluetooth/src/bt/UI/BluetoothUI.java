@@ -4,13 +4,14 @@
  * and open the template in the editor.
  */
 package bt.UI;
-import java.awt.*;
 import javax.swing.JFrame;
-import javax.swing.Timer;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 import org.jfree.chart.*;
 import org.jfree.chart.plot.PlotOrientation;
-import org.jfree.data.*;
 import org.jfree.data.category.DefaultCategoryDataset;
+import org.jfree.data.xy.XYSeries;
+import org.jfree.data.xy.XYSeriesCollection;
 
 /**
  *
@@ -25,19 +26,25 @@ public class BluetoothUI extends javax.swing.JFrame {
         initComponents();
         JFreeChart Grafica;
         
+        final XYSeries serie = new XYSeries("Temperatura");
+        final XYSeriesCollection collection = new XYSeriesCollection();
+        
         this.setVisible(true);
         this.setSize(800, 600);
         this.setLocationRelativeTo(null);
         this.setTitle("Counter of temperature by bluetooth");
         
-        Grafica = ChartFactory.createLineChart3D("Temperatura por segundo", "Segundo", "Temperatura",
-        Datos, PlotOrientation.VERTICAL, true, true, false);
+        serie.add(0, 0);
+        collection.addSeries(serie);
+        Grafica = ChartFactory.createXYLineChart("Temperatura por segundo", "Segundo", "Temperatura",
+        collection, PlotOrientation.VERTICAL, true, true, false);
         
         int minutos = 0;
-        int segundoActual = 0 ;
+        int segundo = 0 ;
         int temperatura = 5;
 
             //Ventana de la 
+            graficPanel = new ChartPanel(Grafica);
             JFrame representarGrafica = new JFrame();
             representarGrafica.getContentPane().add(graficPanel);
             representarGrafica.pack();
@@ -45,17 +52,27 @@ public class BluetoothUI extends javax.swing.JFrame {
             representarGrafica.setLocationRelativeTo(null);
             representarGrafica.setVisible(true);
             representarGrafica.setSize(800, 600);
-        while (segundoActual>=0){
+        while (segundo>=0){
             temperatura++;
-            segundoActual++;
-            if(segundoActual == 60){
-                segundoActual = 0;
+            segundo++;
+            if(segundo == 60){
+                segundo = 0;
                 minutos++;
             }
-            System.out.println(minutos+":"+segundoActual);
-            Datos.addValue(temperatura, "Temperatura", segundoActual +"s");
+            
+            JLabel timeLabel = new JLabel();
+            JLabel temperatureLabel = new JLabel();
+            timeLabel.setText("Segundo " +segundo);
+            temperatureLabel.setText("Temperatura " +temperatura);
+            
+            JPanel otroPanel = new JPanel();
+            otroPanel.setLocation(0, 0);
+            this.add(otroPanel);
+            otroPanel.add(timeLabel);
+            otroPanel.add(temperatureLabel);
+            System.out.println(minutos+":"+segundo);
+            serie.add(segundo, temperatura);
             delaySegundo(); 
-            graficPanel = new ChartPanel(Grafica);
             }
         }
     
