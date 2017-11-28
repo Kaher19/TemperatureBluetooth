@@ -5,7 +5,10 @@
  */
 package bt.UI;
 
+import java.awt.Image;
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
@@ -20,27 +23,34 @@ import org.jfree.data.xy.XYSeriesCollection;
 public class BluetoothUI {
     public void bluetoothUI(){
         JFreeChart Grafica;
-        JFrame representarGrafica = new JFrame();
+        JFrame graphWindow = new JFrame();
+        JPanel graphArea = new JPanel();
+        ImageIcon image = new ImageIcon("Logo_Kaher.png");
+        Image imagenExterna = image.getImage();
         
         final XYSeries serie = new XYSeries("Temperature");
         final XYSeries average = new XYSeries("Average");
         final XYSeriesCollection collection = new XYSeriesCollection();
         
         Grafica = ChartFactory.createXYLineChart("Temperature per second", "Second", "Temperature",
-        collection, PlotOrientation.VERTICAL, true, true, false);
+        collection, PlotOrientation.VERTICAL, true, true, true);
         
         ChartPanel graficPanel = new ChartPanel(Grafica);
         
-        graficPanel.setMouseWheelEnabled(true);
-        graficPanel.setMouseZoomable(true);
+        graficPanel.setSize(200, 200);
+        graficPanel.setAlignmentX(ChartPanel.RIGHT_ALIGNMENT);
+        graficPanel.setAlignmentY(ChartPanel.TOP_ALIGNMENT);
         
-        representarGrafica.setLocation(150,150);
-        representarGrafica.setTitle("Temperature Vs. Time");
-        representarGrafica.setSize(1280, 720);
-        representarGrafica.setVisible(true);
-        representarGrafica.getContentPane().add(graficPanel);
-        representarGrafica.pack();
-        representarGrafica.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        graphArea.setSize(400, 400);
+        graphArea.add(graficPanel);
+        graphArea.setToolTipText("Grafica de la temperatura");
+        
+        graphWindow.setIconImage(imagenExterna);
+        graphWindow.setTitle("Temperature Vs. Time");
+        graphWindow.setSize(800, 600);
+        graphWindow.setVisible(true);
+        graphWindow.add(graphArea);
+        graphWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         
         
         serie.add(0, 0);
@@ -54,7 +64,7 @@ public class BluetoothUI {
         int averageT;
         
         while (seconds>=0){
-            temperatura=seconds^2;
+            temperatura=seconds^2*temperaturas;
             temperaturas = temperaturas + temperatura;
             seconds++;
             averageT=temperaturas/seconds;
@@ -65,7 +75,7 @@ public class BluetoothUI {
             serie.add(seconds, temperatura);
             average.add(seconds, averageT);
             delaySegundo(); 
-            }
+        }
     }
     
     private static void delaySegundo(){      
