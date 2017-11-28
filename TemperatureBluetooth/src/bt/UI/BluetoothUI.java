@@ -4,15 +4,6 @@
  * and open the template in the editor.
  */
 package bt.UI;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import org.jfree.chart.*;
-import org.jfree.chart.plot.PlotOrientation;
-import org.jfree.data.category.DefaultCategoryDataset;
-import org.jfree.data.xy.XYSeries;
-import org.jfree.data.xy.XYSeriesCollection;
-
 /**
  *
  * @author Kirbey García
@@ -23,60 +14,8 @@ public class BluetoothUI extends javax.swing.JFrame {
      * Creates new form UI
      */
     public BluetoothUI() {
-        initComponents();
-        JFreeChart Grafica;
         
-        final XYSeries serie = new XYSeries("Temperatura");
-        final XYSeriesCollection collection = new XYSeriesCollection();
-        
-        this.setVisible(true);
-        this.setSize(800, 600);
-        this.setLocationRelativeTo(null);
-        this.setTitle("Counter of temperature by bluetooth");
-        
-        serie.add(0, 0);
-        collection.addSeries(serie);
-        Grafica = ChartFactory.createXYLineChart("Temperatura por segundo", "Segundo", "Temperatura",
-        collection, PlotOrientation.VERTICAL, true, true, false);
-        
-        int minutos = 0;
-        int segundo = 0 ;
-        int temperatura = 5;
-
-            //Ventana de la 
-            graficPanel = new ChartPanel(Grafica);
-            JFrame representarGrafica = new JFrame();
-            representarGrafica.getContentPane().add(graficPanel);
-            representarGrafica.pack();
-            representarGrafica.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            representarGrafica.setLocationRelativeTo(null);
-            representarGrafica.setVisible(true);
-            representarGrafica.setSize(800, 600);
-        while (segundo>=0){
-            temperatura++;
-            segundo++;
-            if(segundo == 60){
-                segundo = 0;
-                minutos++;
-            }
-            
-            JLabel timeLabel = new JLabel();
-            JLabel temperatureLabel = new JLabel();
-            timeLabel.setText("Segundo " +segundo);
-            temperatureLabel.setText("Temperatura " +temperatura);
-            
-            JPanel otroPanel = new JPanel();
-            otroPanel.setLocation(0, 0);
-            this.add(otroPanel);
-            otroPanel.add(timeLabel);
-            otroPanel.add(temperatureLabel);
-            System.out.println(minutos+":"+segundo);
-            serie.add(segundo, temperatura);
-            delaySegundo(); 
-            }
-        }
-    
-    DefaultCategoryDataset Datos = new DefaultCategoryDataset();
+    }
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -88,18 +27,56 @@ public class BluetoothUI extends javax.swing.JFrame {
     private void initComponents() {
 
         graficPanel = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        panelito = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        graficPanel.setMinimumSize(new java.awt.Dimension(800, 600));
+        graficPanel.setPreferredSize(new java.awt.Dimension(800, 600));
+
+        jLabel1.setText("jLabel1");
+
+        jLabel2.setText("jLabel2");
+
+        javax.swing.GroupLayout panelitoLayout = new javax.swing.GroupLayout(panelito);
+        panelito.setLayout(panelitoLayout);
+        panelitoLayout.setHorizontalGroup(
+            panelitoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 705, Short.MAX_VALUE)
+        );
+        panelitoLayout.setVerticalGroup(
+            panelitoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 500, Short.MAX_VALUE)
+        );
 
         javax.swing.GroupLayout graficPanelLayout = new javax.swing.GroupLayout(graficPanel);
         graficPanel.setLayout(graficPanelLayout);
         graficPanelLayout.setHorizontalGroup(
             graficPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(graficPanelLayout.createSequentialGroup()
+                .addGap(33, 33, 33)
+                .addGroup(graficPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel1))
+                .addGap(18, 18, 18)
+                .addComponent(panelito, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         graficPanelLayout.setVerticalGroup(
             graficPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(graficPanelLayout.createSequentialGroup()
+                .addGroup(graficPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(graficPanelLayout.createSequentialGroup()
+                        .addGap(30, 30, 30)
+                        .addComponent(jLabel1)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel2))
+                    .addGroup(graficPanelLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(panelito, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(89, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -119,11 +96,8 @@ public class BluetoothUI extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel graficPanel;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JPanel panelito;
     // End of variables declaration//GEN-END:variables
-    private static void delaySegundo(){      
-             try{Thread.sleep(1000);
-             }catch(InterruptedException e){
-             }
-        }
-
 }
