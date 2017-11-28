@@ -14,8 +14,55 @@ public class BluetoothUI extends javax.swing.JFrame {
      * Creates new form UI
      */
     public BluetoothUI() {
+<<<<<<< HEAD
         
     }
+=======
+        initComponents();
+        JFreeChart Grafica;
+        
+        final XYSeries serie = new XYSeries("Temperatura");
+        final XYSeriesCollection collection = new XYSeriesCollection();
+        
+        this.setVisible(true);
+        this.setSize(800, 600);
+        this.setLocationRelativeTo(null);
+        this.setTitle("Counter of temperature by bluetooth");
+        
+        serie.add(0, 0);
+        collection.addSeries(serie);
+        Grafica = ChartFactory.createXYLineChart("Temperature every second", "Second", "Temperature",
+        collection, PlotOrientation.VERTICAL, true, true, false);
+        
+        int segundo = 0 ;
+        int temperatura = 0;
+        float average = 0;
+        float temperaturas = 0;
+
+            //Ventana de la 
+            graficPanel = new ChartPanel(Grafica);
+            JFrame representarGrafica = new JFrame();
+            representarGrafica.getContentPane().add(graficPanel);
+            representarGrafica.pack();
+            representarGrafica.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            representarGrafica.setLocationRelativeTo(null);
+            representarGrafica.setVisible(true);
+            representarGrafica.setSize(800, 600);
+        while (segundo>=0){
+            temperatura=temperatura^(temperatura++-segundo);
+            segundo++;
+            temperaturas = temperaturas+temperatura;
+            average = temperaturas/segundo;
+            
+            timeLabel.setText("Segundo " +segundo);
+            temperatureLabel.setText("Temperatura " +temperatura +"ºC");
+            averageLabel.setText("Promedio " +average +"ºC");
+            System.out.println("Tiempo actual: "+segundo);
+            serie.add(segundo, temperatura);
+            delaySegundo(); 
+            }
+        }
+>>>>>>> cd872def83563acde12fdf87a8efbc628b10d5a8
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -27,9 +74,15 @@ public class BluetoothUI extends javax.swing.JFrame {
     private void initComponents() {
 
         graficPanel = new javax.swing.JPanel();
+<<<<<<< HEAD
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         panelito = new javax.swing.JPanel();
+=======
+        timeLabel = new javax.swing.JLabel();
+        temperatureLabel = new javax.swing.JLabel();
+        averageLabel = new javax.swing.JLabel();
+>>>>>>> cd872def83563acde12fdf87a8efbc628b10d5a8
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -66,6 +119,7 @@ public class BluetoothUI extends javax.swing.JFrame {
         );
         graficPanelLayout.setVerticalGroup(
             graficPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+<<<<<<< HEAD
             .addGroup(graficPanelLayout.createSequentialGroup()
                 .addGroup(graficPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(graficPanelLayout.createSequentialGroup()
@@ -77,17 +131,41 @@ public class BluetoothUI extends javax.swing.JFrame {
                         .addContainerGap()
                         .addComponent(panelito, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(89, Short.MAX_VALUE))
+=======
+            .addGap(0, 250, Short.MAX_VALUE)
+>>>>>>> cd872def83563acde12fdf87a8efbc628b10d5a8
         );
+
+        timeLabel.setText("timeLabel");
+
+        temperatureLabel.setText("temperatureLabel");
+
+        averageLabel.setText("averageLabel");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(graficPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(timeLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(averageLabel)
+                .addGap(95, 95, 95)
+                .addComponent(temperatureLabel)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(graficPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(timeLabel)
+                    .addComponent(temperatureLabel)
+                    .addComponent(averageLabel))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
+                .addComponent(graficPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
@@ -95,9 +173,15 @@ public class BluetoothUI extends javax.swing.JFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel averageLabel;
     private javax.swing.JPanel graficPanel;
+<<<<<<< HEAD
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel panelito;
+=======
+    private javax.swing.JLabel temperatureLabel;
+    private javax.swing.JLabel timeLabel;
+>>>>>>> cd872def83563acde12fdf87a8efbc628b10d5a8
     // End of variables declaration//GEN-END:variables
 }
